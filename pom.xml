@@ -42,19 +42,42 @@
         <url>http://airflow-2.transcendstreet.net:8081/repository/devopsharsha-snapshot/</url>
     </snapshotRepository>
   </distributionManagement>
+
   <build>
     <plugins>
+      <!-- Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <!-- Set Java version to 1.8 (Java 8) -->
           <source>11</source>
           <target>11</target>
         </configuration>
       </plugin>
-      </plugins>
+
+      <!-- JaCoCo Plugin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.10</version>
+        <executions>
+          <!-- Run JaCoCo during the test phase -->
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <!-- Generate the report after tests -->
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
-
